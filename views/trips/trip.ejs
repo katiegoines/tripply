@@ -1,4 +1,3 @@
-
 <div class='container trip-page'>
     <div class='row'>
         <div class='col-8'>
@@ -20,46 +19,49 @@
         <%# for (let i = 0; i < tripLength; i += 1) { %>
 
         <%# } %> -->
-        
-        <% activities.forEach(function(a) { %>
-            <div class='col-12'>
-                    <h3><%= a.date %></h3>
-                </div>
-            <div class='row activities'>
-                <div class='col-4 activity-name'>
-                    <h6><%= a.place %></h6>
-                </div>
-                <div class='col-4 activity-time'>
-                    <h6><%= a.time %></h6>
-                </div>
-                <div class='col-2'>
 
-                </div>
-                <div class='col-1 activity-button'>
-                    <button>
-                        See Details
-                    </button>
-                </div>
-            </div>
-        <% }) %>
-        
-        <!-- <%// }) %>  -->
+    <% activities.forEach(function(a) { %>
+    <div class='col-12'>
+        <h3><%= a.date %></h3>
     </div>
-    <form action="/users/profile/edit">
-        <button type="submit" id="update">Edit Profile</button>
-    </form>	
+    <div class='row activities'>
+        <div class='col-4 activity-name'>
+            <h6><%= a.place %></h6>
+        </div>
+        <div class='col-4 activity-time'>
+            <h6><%= a.time %></h6>
+        </div>
+        <div class='col-2'>
+            <h6><%= a.description %></h6>
+        </div>
+        <div class='col-1'>
+            <!-- assign id to button based on objects db id to use in ajax request -->
+            <button id="<%= a._id %>" class="activity-button">See Details</button>
+        </div>
+    </div>
+    <% }) %>
+</div>
+
+
+<form action="/users/profile/edit">
+<button type="submit" id="update">Edit Profile</button>
+</form>	
 </div>
 
 <div class="modal fade" id="newActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        
-        
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Activity</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="new-activity-form">
+                    <div class="form-group">
+                        <label for="name">Place</label>
+                        <input type="text" class="form-control" name="place">
                     </div>
                     <div class="modal-body">
                       <form id="new-activity-form">
@@ -80,44 +82,95 @@
                           <input type="textarea" class="form-control" name="description">
                       </div>
                       <button id="add-activity" type="submit" class="btn btn-primary">Add Activity</button>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="activityModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="activityModalLabel">Activity Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <section id="activityPlace"> Place: </section>
+                <section id="activityDate"> Date: </section>
+                <section id="activityTime"> Time: </section>
+                <section id="activityDescription"> Description: </section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
         
-        
-              <script>
+<script>
+//datepicker js 
+  $.fn.datepicker.defaults.format = "mm/dd/yyyy";
+  $('.datepicker').datepicker({
+      startDate: '-3d'
+  });
+  $('.datepicker').datepicker();
+  $('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+  });
 
-                var $newActivityBtn = $('.new-activity-button')
-                $newActivityBtn.on('click', function() {
-                    $('#newActivityModal').modal()
-                })
+// variable set
+    var $activityButton = $('.activity-button')
+    var $newActivityBtn = $('.new-activity-button')
+// activity show stuff
+    // activity detail click function
+    $activityButton.on('click', function() {
+        var activityId = $(this).attr('id')
+        console.log($(this).attr('id'))
+        // show modal on click
+        $('#activityModal').modal()
+        // use ajax to populate the modal with data from the route specified
+        $.ajax({
+            // create url by concatenating activityId 
+            url: '/trips/<%= trip._id %>/activities/' + activityId,
+            method: 'get'
+        })
+        .done((res) => { 
+            $('#activityPlace').text('Place: ' + res.place)
+            $('#activityDate').text('Date: ' + res.date)
+            $('#activityTime').text('Time: ' + res.time)
+            $('#activityDescription').text('Description: ' + res.description)
+        })
+    })
+// NEW ACTIVITY STUFF
+    $newActivityBtn.on('click', function() {
+        $('#newActivityModal').modal()
+    })
+    var $newActivityForm = $('#new-activity-form')
+    $newActivityForm.on('submit', (evt) => {
+        evt.preventDefault()
+    var formData = {
+        "place": $('input[name=place').val(),
+        "date": $('input[name=date').val(),
+        "time": $('input[name=time').val(),
+        "description": $('input[name=description').val()
+    }
+    $.ajax({
+        url: '/trips/<%= trip._id %>/activity',
+        method: 'POST',
+        data: JSON.stringify(formData),
+        contentType: 'application/json'
+    })
+    .done((data) => {
+        console.log(data)
+        $('#newActivityModal').modal('hide')
+    })
+})
+</script>
 
-                  var $newActivityForm = $('#new-activity-form')
-                    $newActivityForm.on('submit', (evt) => {
-                        evt.preventDefault()
-                        var formData = {
-                            "place": $('input[name=place').val(),
-                            "date": $('input[name=date').val(),
-                            "time": $('input[name=time').val(),
-                            "description": $('input[name=description').val()
-                        }
-                        $.ajax({
-                            url: '/trips/<%= trip._id %>/activity',
-                            method: 'POST',
-                            data: JSON.stringify(formData),
-                            contentType: 'application/json'
-                        })
-                        .done((data) => {
-                            console.log(data)
-                            $('#newActivityModal').modal('hide')
-
-                        })
-                      
-                      })
-                    </script>
-    

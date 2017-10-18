@@ -35,7 +35,7 @@ tripsRouter.route('/:id')
         })
     })
 
-    tripsRouter.route('/:id/activity')
+tripsRouter.route('/:id/activity')
     .get((req, res) => {
         Trip.findById(req.params.id, (err, trip) => {
             //res.json(trip)
@@ -63,4 +63,10 @@ tripsRouter.route('/:id')
         })
     })
 
+tripsRouter.get('/:tripId/activities/:activityId', (req, res) => {
+    Activity.findById(req.params.activityId, (err, activity) => {
+        res.json(activity)
+    })
+}) 
+    
 module.exports = tripsRouter
