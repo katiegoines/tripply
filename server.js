@@ -6,7 +6,6 @@ const
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser')
     mongoDBURL = 'mongodb://localhost/tripply',
-    datepicker = require('bootstrap-datepicker'),
     ejsLayouts = require('express-ejs-layouts'),
     tripsRoutes = require('./routes/trips.js'),
     usersRoutes = require('./routes/users.js'),
@@ -36,7 +35,6 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(ejsLayouts)
 app.use(bodyParser.urlencoded())
-app.use(datepicker)
 app.use(flash())
 app.use(express.static(`${__dirname}/public`))
 app.use(methodOverride('_method'))
