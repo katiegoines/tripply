@@ -2,7 +2,8 @@ const
 mongoose = require('mongoose')
 tripSchema = new mongoose.Schema({
     name: {type: String, required: true},
-    length: {type: Number, required: true},
+    startDate: {type: Date, required: true},
+    endDate: {type: Date, required: true},
     locale: {type: String, required: true},
     description: {type: String, default: 'Description not yet added'},
     photo: String,

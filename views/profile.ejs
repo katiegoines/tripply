@@ -37,7 +37,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">New Trip</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -48,9 +48,14 @@
             <label for="name">Trip Name</label>
             <input type="text" class="form-control" name="name">
         </div>
-          <div class="form-group">
-            <label for="length">Trip Length</label>
-            <input type="number" class="form-control" name="length">
+
+        <div class="form-group" data-provide="datepicker" data-date-format="mm/dd/yyyy">
+            <label for="startDate">Trip Start Date</label>
+            <input type="text" class="form-control" name="startDate">
+        </div>
+        <div class="form-group" data-provide="datepicker" data-date-format="mm/dd/yyyy">
+            <label for="endDate">Trip End Date</label>
+            <input type="text" class="form-control" name="endDate">
         </div>
           <div class="form-group">
             <label for="local">Trip Location</label>
@@ -71,27 +76,37 @@
 </div>
 
 <script>
-$('#submit').on('submit', (evt) => {
-  console.log('you clicked something')
-  //var newTrip = new Trip(req.body)
-  //newTrip.user = req.user._id
-  //newTrip.save((err, trip) => {
-    //console.log(trip)
-  //})
-  var formData = {
-    "name": $('input[name=name').val(),
-    "length": $('input[name=length').val(),
-    "locale": $('input[name=locale').val()
-  }
-  $.ajax({
-    url: '/users/profile',
-    method: 'POST',
-    data: formData,
-    dataType: 'json'
-  })
-  .done((data) => {
-    console.log(data)
-  })
-  evt.preventDefault()
-  })
+  $.fn.datepicker.defaults.format = "mm/dd/yyyy";
+  $('.datepicker').datepicker({
+      startDate: '-3d'
+  });
+  $('.datepicker').datepicker();
+  $('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+  });
+
+  $('#submit').on('submit', (evt) => {
+    console.log('you clicked something')
+    //var newTrip = new Trip(req.body)
+    //newTrip.user = req.user._id
+    //newTrip.save((err, trip) => {
+      //console.log(trip)
+    //})
+    var formData = {
+      "name": $('input[name=name').val(),
+      "length": $('input[name=length').val(),
+      "locale": $('input[name=locale').val()
+    }
+    $.ajax({
+      url: '/users/profile',
+      method: 'POST',
+      data: formData,
+      dataType: 'json'
+    })
+    .done((data) => {
+      console.log(data)
+    })
+    evt.preventDefault()
+    })
 </script>

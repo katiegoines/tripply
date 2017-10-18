@@ -6,13 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tripply</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="/css/styles.css">
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-datepicker.js"></script>
+
 </head>
 <body>
     <% include ./partials/navbar %> 
     <%- body %> 
+    <script>
+        $(function() {
+            $('.datepicker').datepicker()           
+        })
+    </script>
 </body>
 </html>

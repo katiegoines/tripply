@@ -3,16 +3,23 @@
         <div class='col-8'>
             <h1><%= trip.name %></h1>
         </div>
-    <div class='col-4'>
-        <button class='new-activity-button'>
-            <h3>Add Activity</h3>                
-        </button>
+        <div class='col-4'>
+            <button class='new-activity-button'>
+                <h3>Add Activity</h3>                
+            </button>
+        </div>
     </div>
-</div>
-<!-- need to change the below section to be a div for each DAY
-In that day we want to see the name of each activity with the time (as list items)
-And a button that displays a modal of the activity details on click -->
-<div class='row day'>
+    <!-- need to change the below section to be a div for each DAY
+    In that day we want to see the name of each activity with the time (as list items)
+    And a button that displays a modal of the activity details on click -->
+    <div class='row day'>
+
+        <!-- <%# tripLength = trip.endDate - trip.startDate %> 
+
+        <%# for (let i = 0; i < tripLength; i += 1) { %>
+
+        <%# } %> -->
+
     <% activities.forEach(function(a) { %>
     <div class='col-12'>
         <h3><%= a.date %></h3>
@@ -35,6 +42,7 @@ And a button that displays a modal of the activity details on click -->
     <% }) %>
 </div>
 
+
 <form action="/users/profile/edit">
 <button type="submit" id="update">Edit Profile</button>
 </form>	
@@ -55,20 +63,26 @@ And a button that displays a modal of the activity details on click -->
                         <label for="name">Place</label>
                         <input type="text" class="form-control" name="place">
                     </div>
-                    <div class="form-group">
-                        <label for="length">Date</label>
-                        <input type="number" class="form-control" name="date">
+                    <div class="modal-body">
+                      <form id="new-activity-form">
+                        <div class="form-group">
+                          <label for="name">Place</label>
+                          <input type="text" class="form-control" name="place">
+                      </div>
+                      <div class="form-group" data-provide="datepicker" data-date-format="mm/dd/yyyy">
+                        <label for="date">Date</label>
+                        <input type="text" class="form-control" name="date">
                     </div>
-                    <div class="form-group">
-                        <label for="local">Time</label>
-                        <input type="text" class="form-control" name="time">
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <input type="textarea" class="form-control" name="description">
-                    </div>
-                    <button id="add-activity" type="submit" class="btn btn-primary">Add Activity</button>
-                </form>
+                        <div class="form-group">
+                          <label for="local">Time</label>
+                          <input type="text" class="form-control" name="time">
+                      </div>
+                        <div class="form-group">
+                          <label for="description">Description</label>
+                          <input type="textarea" class="form-control" name="description">
+                      </div>
+                      <button id="add-activity" type="submit" class="btn btn-primary">Add Activity</button>
+                  </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -100,6 +114,17 @@ And a button that displays a modal of the activity details on click -->
 </div>
         
 <script>
+//datepicker js 
+  $.fn.datepicker.defaults.format = "mm/dd/yyyy";
+  $('.datepicker').datepicker({
+      startDate: '-3d'
+  });
+  $('.datepicker').datepicker();
+  $('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+  });
+
 // variable set
     var $activityButton = $('.activity-button')
     var $newActivityBtn = $('.new-activity-button')
