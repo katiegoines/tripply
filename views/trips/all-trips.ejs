@@ -13,8 +13,8 @@
                 <div class="card card-height" style="width: 20rem;">
                     <img class="card-img-top" src="http://blog.kesari.in/wp-content/uploads/2017/03/Summer-suitcase.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <h4 class="card-title"><%= trips[i].name %></h4>
-                        <p class="card-text"><%= trips[i].description %>.</p>
+                        <h4 class="card-title"><%= trips[i].name.substring(0, 25) %></h4>
+                        <p class="card-text"><%= trips[i].description.substring(0, 35) || "No Description" %></p>
                         <a href="/trips/<%= trips[i]._id %>" class="btn btn-primary">See Trip</a>
                     </div>
                 </div>
