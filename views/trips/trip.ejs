@@ -425,22 +425,22 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
         })
 
 
-    $('#add').on('submit', (evt) => {
-        console.log('you clicked')
-        var formData = {
-            "place": $('input[name=place]').val(),
-            "address": $('input[address]').val(),
-            "date": $('input[name=date]').val(),
-            "time": $('input[name=time]').val(),
-            "description": $('input[name=description]').val()
-        }
-        $.ajax({
-            url: '/trips/<%= trip._id %>/activity',
-            method: 'POST',
-            data: JSON.stringify(formData),
-            contentType: 'application/json',
+        $('#add').on('submit', (evt) => {
+            console.log('you clicked')
+            var formData = {
+                "place": $('input[name=place]').val(),
+                "address": $('input[address]').val(),
+                "date": $('input[name=date]').val(),
+                "time": $('input[name=time]').val(),
+                "description": $('input[name=description]').val()
+            }
+            $.ajax({
+                url: '/trips/<%= trip._id %>/activity',
+                method: 'POST',
+                data: JSON.stringify(formData),
+                contentType: 'application/json',
+            })
         })
-    })
 
 // SEARCH YELP
     var $yelpActivityBtn = $('#new-activity-yelp')

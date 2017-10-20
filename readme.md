@@ -2,7 +2,7 @@
 
 *An app that helps users create itineraries for their vacations.*
 
-Here at Sockaputa headquarters we attribute our success to us always taking a step back and asking ourselves, how can we improve the world. With this motto in mind, the concept of Tripply was born. We know planning a vacation can be stressfull. Not anymore. Tripply is designed to help you create a detailed itinerary for your upcoming vacation. Most importantly, it is fully scalable. To begin a user clicks on "Sign Up" to create an account. Once signed in a user will be directed to thier profile page. They can then create a trip, by clicking "Plan Trip". After filling out the necessary trip details, you will be directed to the trip page, where you can then create new activities for your trip. You are given the option of either creating your own activity, or to use a Yelp API to suggest possible activities in your area. You can then view the location of a specific activity with the Google Maps API. If you would like to see the forecast for the location you are traveling to, simply click on the "show forecast" button. Both your trips and activities will be organized by date and time. Once you have filled out your itinerary you are on your way to a productive,exciting, well earned vacation. Happy travels!
+Here at Sockaputa Inc we attribute our success to us always taking a step back and asking ourselves can we make our app scalable. With this motto in mind, the concept of Tripply was born. We know planning a vacation can be stressfull. Not anymore. Tripply is designed to help you create a detailed itinerary for your upcoming vacation. To begin a user clicks on "Sign Up" to create an account. Once signed in a user will be directed to thier profile page. They can then create a trip, by clicking "Plan Trip". After filling out the necessary trip details, you will be directed to the trip page, where you can then create new activities for your trip. You are given the option of either creating your own activity, or to use a Yelp API to suggest possible activities in your area. You can also view the location of a specific activity with the Google Maps API. If you would like to see the forecast for the location you are traveling to, simply click on the "show forecast" button. Both your trips and activities will be organized by date and time. Once you have filled out your itinerary you are on your way to a productive,exciting, well earned vacation. 
 
 [Check out Tripply](https://gotripply.herokuapp.com/)
 
@@ -43,7 +43,7 @@ Each day, all four of the Sockapoota members would assemble and take upon oursel
 3. Made the individual views
 4. Incorporated Yelp, Google Maps and Weather API's
 5. Added CSS/Bootstrap 
-6. Stay late and drink beer
+6. Stayed late and drink beer
 
 
 
@@ -55,8 +55,7 @@ Each day, all four of the Sockapoota members would assemble and take upon oursel
 - CRUD for Trips User, and Activities - Everyone
 - Design - Cole (calendar, homepage) Katie (font, alltrips view)
 - Views - Everyone
-- Presentation - Jason
-- ReadMe - Phil
+
 
 
 
@@ -76,8 +75,10 @@ Wireframes:
 - Home page: https://wireframe.cc/EEopei
 - Main user page: https://wireframe.cc/k2EUyp
 - All trips page: https://wireframe.cc/EcsXVW
-
-Data Models: https://ga-students.slack.com/files/U6GV09FK8/F7K3R5WCE/20171013_152815.jpg
+Models:
+https://imgur.com/Hry13A0
+ 
+<!-- Data Models: https://ga-students.slack.com/files/U6GV09FK8/F7K3R5WCE/20171013_152815.jpg -->
 
 
 
@@ -87,7 +88,7 @@ Data Models: https://ga-students.slack.com/files/U6GV09FK8/F7K3R5WCE/20171013_15
 
 - Creating, editing and deleting models through AJAX was more difficult than we thought
 
-- - Dealing with github was insanity. The process of making sure no one elses code conflicted with another team members was not easy
+- - Dealing with github. The process of making sure no one elses code conflicted with another team members was not easy
 
 
   ​
@@ -95,19 +96,15 @@ Data Models: https://ga-students.slack.com/files/U6GV09FK8/F7K3R5WCE/20171013_15
 
 
 ## Future Features
-- A registered user should be able to search other APIs (in addition to Yelp), to populate activities, i.e. TripAdvisor
+- A registered user should be able to search other APIs (in addition to Yelp), to populate activities, i.e. TripAdvisor, Expedia
 
 - A registered user should be able to decide whether or not they want their trip to be public
-
-- When clicked into activity details, a user should be able to see a map of the location of the activity
-
-- When clicked into a trip, a user should be able to see weather for the location/time period of the trip
 
 - A user can rate their experience of the activities they do (1-5 stars)
 
 - A user can copy another users trip/activity to their itinerary
 
-- A user can upload pictures of thier dope trip
+- A user can upload pictures to show how lit their trip was
 
 - [See our Trello Icebox for a full list](https://trello.com/b/nZnU8Mt8/project-3-tripply)
 
