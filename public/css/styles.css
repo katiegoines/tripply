@@ -220,6 +220,16 @@
     margin-top: -2rem!important; 
 }
 
+
+/*
+MAP
+*/
+
+#map {
+    height: 200px;
+    width: 100%;
+}
+
 /* Edit trip view styles */
 .edit-trip-back {
     text-align: right; 

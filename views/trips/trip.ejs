@@ -1,3 +1,6 @@
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUxOM-484WU&callback=initMap">
+</script>
 <div class='container trip-page'>
     <div class='row'>
         <div class='col-6'>
@@ -185,7 +188,8 @@
                 </div>
                 <div class="modal-body">
                     <section id="activityPlace"> Place: </section>
-                    <section id="activityAddress"> Address: </section>
+                    <section id="activityAddress"></section>
+                    <div id="map"></div>
                     <section id="activityDate"> Date: </section>
                     <section id="activityTime"> Time: </section>
                     <section id="activityDescription"> Description: </section>
@@ -250,124 +254,176 @@
 
 
 <script>
-    var weather = $('#weather') 
-    weather.on('click', function(e) {
-    e.preventDefault()
-    var locale = trip.locale
-    $.ajax({
-        url: `/weather/${locale}`,
-        method: 'get'
-    })
-    .done((res) => {
-        redirect('/weather', res)
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16
         })
-    })
-
-
-var globalActivityId
-// DATEPICKER
-    $('.datepicker').datepicker({
-        format: 'mm/dd/yyyy',
-        startDate: '-3d'
-    })
-
-
-// ACTIVITY VIEW
-    // variable set
-        var $activityButton = $('.activity-button')
-        var $newActivityBtn = $('.new-activity-button')
-    // activity show stuff
-        // activity detail click function
-        $activityButton.on('click', function() {
-            
-            var activityId = $(this).attr('id')
-            console.log($(this).attr('id'))
-            // show modal on click
-            $('#activityModal').modal()
-            // use ajax to populate the modal with data from the route specified
-            $.ajax({
-                // create url by concatenating activityId 
-                url: '/trips/<%= trip._id %>/activities/' + activityId,
-                method: 'get'
-            })
-            .done((res) => { 
-                $('#activityPlace').text('Place: ' + res.place)
-                $('#activityAddress').text('Address: ' + res.address)
-                $('#activityDate').text('Date: ' + res.date)
-                $('#activityTime').text('Time: ' + res.time)
-                $('#activityDescription').text('Description: ' + res.description)
-
-                $('#edit-activity-place').val(res.place)
-                $('#editActivityDate').val(res.date)
-                $('#editActivityTime').val(res.time)
-                $('#editActivityDescription').val(res.description)
-
-                globalActivityId = activityId
-            })
+        marker = new google.maps.Marker({
+            map: map
+        })
+        var latitude
+        var longitude
+        $('#activityModal').on('shown.bs.modal', function() {
+            var uluru = {lat: latitude, lng: longitude}
+            google.maps.event.trigger(map, 'resize')
+            marker.setPosition({lat: latitude, lng: longitude})
+            map.setCenter({lat: latitude, lng: longitude})
         })
 
-//EDIT ACTIVITY VIEW
-    // variable set
-    var $editActivityBtn = $('.edit-activity-button')
-    $editActivityBtn.on('click', function() {
-        $('#editActivityModal').modal()
-    })
-    
-    var $editActivityForm = $('#edit-activity-form')
-    $editActivityForm.on('submit', (evt) => {
-        evt.preventDefault()
-        var editFormData = {
-                "place": $('#edit-activity-form input[name=place]').val(),
-                "date": $('#edit-activity-form input[name=date]').val(),
-                "time": $('#edit-activity-form input[name=time]').val(),
-                "description": $('#edit-activity-form input[name=description]').val()
-        }
-        var reqUrl =  '/trips/<%= trip._id %>/activities/' + globalActivityId
-        console.log(reqUrl)
+        
+        var weather = $('#weather') 
+        weather.on('click', function(e) {
+        e.preventDefault()
+        var locale = trip.locale
         $.ajax({
-            url: reqUrl,
-            method: 'PATCH',
-            data: JSON.stringify(editFormData),
-            contentType: 'application/json'
+            url: `/weather/${locale}`,
+            method: 'get'
         })
         .done((res) => {
-            console.log(res)
-            $('#editActivityModal').modal('hide')
-            console.log($('#activity-container-' + res._id).find('.activity-place'))
-            console.log(res.place)
-            $('#activity-container-' + res._id).find('.activity-place').text(res.place)
-            $('#activity-container-' + res._id).find('.activity-date').text(res.date)
-            $('#activity-container-' + res._id).find('.activity-time').text(res.time)
-            $('#activity-container-' + res._id).find('.activity-description').text(res.description)
-            location.reload();
+            redirect('/weather', res)
+            })
         })
-})
 
-// Delete Activity
-    // variable set
-    var $activityButton = $('.activity-button')
-    console.log(globalActivityId)
-    var $deleteActivityBtn = $('.delete-activity-button')
-    // activity detail click function
-    $deleteActivityBtn.on('click', function() {
-        // use ajax to populate the modal with data from the route specified
-        $.ajax({
-            // create url by concatenating globalActivityId 
-            url: '/trips/<%= trip._id %>/activities/' + globalActivityId,
-            method: 'delete'
+
+    var globalActivityId
+    // DATEPICKER
+        $('.datepicker').datepicker({
+            format: 'mm/dd/yyyy',
+            startDate: '-3d'
         })
-        .done((res) => { 
-            //reload the page
-            location.reload();
+
+
+    // ACTIVITY VIEW
+        // variable set
+            var $activityButton = $('.activity-button')
+            var $newActivityBtn = $('.new-activity-button')
+        // activity show stuff
+            // activity detail click function
+            $activityButton.on('click', function() {
+                var activityId = $(this).attr('id')
+                console.log($(this).attr('id'))
+                // show modal on click
+                $('#activityModal').modal()
+                // use ajax to populate the modal with data from the route specified
+                $.ajax({
+                    // create url by concatenating activityId 
+                    url: '/trips/<%= trip._id %>/activities/' + activityId,
+                    method: 'get'
+                })
+                .done((res) => { 
+                    $('#activityPlace').text('Place: ' + res.place)
+                    $('#activityAddress').text('Address:' + res.address)
+                    $('#activityDate').text('Date: ' + res.date)
+                    $('#activityTime').text('Time: ' + res.time)
+                    $('#activityDescription').text('Description: ' + res.description)
+                    $('#edit-activity-place').val(res.place)
+                    $('#editActivityDate').val(res.date)
+                    $('#editActivityTime').val(res.time)
+                    $('#editActivityDescription').val(res.description)
+                    var addy = res.address         
+                    geocoder = new google.maps.Geocoder()
+                    if(geocoder) {
+                        geocoder.geocode({
+                            'address': addy
+                        }, function(results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                address = results[0]
+                                //console.log(address)
+                                latitude = address.geometry.location.lat()
+                                longitude = address.geometry.location.lng()
+                                //console.log(latitude, longitude)
+                            }
+                        })
+                    }
+                    
+                    globalActivityId = activityId
+                })
+                $('#activityModal').modal()
+            })
+
+    //EDIT ACTIVITY VIEW
+        // variable set
+        var $editActivityBtn = $('.edit-activity-button')
+        $editActivityBtn.on('click', function() {
+            $('#editActivityModal').modal()
         })
-    })
         
-// ADD ACTIVITY
-    var $newActivityForm = $('#new-activity-form')
-
-    $newActivityBtn.on('click', function() {
-        $('#newActivityModal').modal()
+        var $editActivityForm = $('#edit-activity-form')
+        $editActivityForm.on('submit', (evt) => {
+            evt.preventDefault()
+            var editFormData = {
+                    "place": $('#edit-activity-form input[name=place]').val(),
+                    "date": $('#edit-activity-form input[name=date]').val(),
+                    "time": $('#edit-activity-form input[name=time]').val(),
+                    "description": $('#edit-activity-form input[name=description]').val()
+            }
+            var reqUrl =  '/trips/<%= trip._id %>/activities/' + globalActivityId
+            console.log(reqUrl)
+            $.ajax({
+                url: reqUrl,
+                method: 'PATCH',
+                data: JSON.stringify(editFormData),
+                contentType: 'application/json'
+            })
+            .done((res) => {
+                console.log(res)
+                $('#editActivityModal').modal('hide')
+                console.log($('#activity-container-' + res._id).find('.activity-place'))
+                console.log(res.place)
+                $('#activity-container-' + res._id).find('.activity-place').text(res.place)
+                $('#activity-container-' + res._id).find('.activity-date').text(res.date)
+                $('#activity-container-' + res._id).find('.activity-time').text(res.time)
+                $('#activity-container-' + res._id).find('.activity-description').text(res.description)
+                location.reload();
+            })
     })
+
+    // Delete Activity
+        // variable set
+        var $activityButton = $('.activity-button')
+        console.log(globalActivityId)
+        var $deleteActivityBtn = $('.delete-activity-button')
+        // activity detail click function
+        $deleteActivityBtn.on('click', function() {
+            // use ajax to populate the modal with data from the route specified
+            $.ajax({
+                // create url by concatenating globalActivityId 
+                url: '/trips/<%= trip._id %>/activities/' + globalActivityId,
+                method: 'delete'
+            })
+            .done((res) => { 
+                //reload the page
+                location.reload(); 
+            })
+        })
+            
+    // ADD ACTIVITY
+        var $newActivityForm = $('#new-activity-form')
+
+        $newActivityBtn.on('click', function() {
+            $('#newActivityModal').modal()
+        })
+
+        $('#add').on('submit', (evt) => {
+            console.log('you clicked')
+            var formData = {
+                "place": $('input[name=place]').val(),
+                "date": $('input[name=date]').val(),
+                "time": $('input[name=time]').val(),
+                "description": $('input[name=description]').val()
+            }
+            $.ajax({
+                url: '/trips/<%= trip._id %>/activity',
+                method: 'POST',
+                data: JSON.stringify(formData),
+                contentType: 'application/json',
+            })
+            .done((data) => {
+                console.log(data)
+                $('#newActivityModal').modal('hide')
+            })
+            evt.preventDefault()
+        })
+
 
     $('#add').on('submit', (evt) => {
         console.log('you clicked')
@@ -384,11 +440,6 @@ var globalActivityId
             data: JSON.stringify(formData),
             contentType: 'application/json',
         })
-        .done((data) => {
-            console.log(data)
-            $('#newActivityModal').modal('hide')
-        })
-        evt.preventDefault()
     })
 
 // SEARCH YELP
@@ -460,6 +511,16 @@ var globalActivityId
             }
         })
     }
+        
+        
+    $('body').on('click', '.select-button', function() {
+        var item = $(this).prev()
+        selectedPlace = item.text()
+        console.log(selectedPlace)
+        checkPlace(selectedPlace)
+        $('#yelpActivityModal').modal('hide')   
+        $('#newActivityModal').modal()
+    })
     
     $('body').on('click', '.select-button', function() {
         var place = $(this).prev()
@@ -493,8 +554,4 @@ var globalActivityId
             $addressInput.val(selectedAddress)
         }
     }
-
-
-
-
 </script>

@@ -2,7 +2,7 @@
 
 *An app that helps users create itineraries for their vacations.*
 
-Here at Sockaputa headquarters we attribute our success to us always taking a step back and asking ourselves, how can we improve the world. With this motto in mind, the concept of Tripply was born. We know planning a vacation can be stressfull. Not anymore. Tripply is designed to help you create a detailed itinerary for your upcoming vacation. Most importantly, it is fully scalable. To begin a user clicks on "Sign Up" to create an account. Once signed in a user will be directed to thier profile page. They can then create a trip, by clicking "Plan Trip". After filling out the necessary trip details, you will be directed to the trip page, where you can then create new activities for your trip. You are given the option of either creating your own activity, or to use a Yelp API to suggest possible activities in your area. Both your trips and activities will be organized by date and time. Once you have filled out your itinerary you are on your way to a productive,exciting, well earned vacation. Happy travels!
+Here at Sockaputa headquarters we attribute our success to us always taking a step back and asking ourselves, how can we improve the world. With this motto in mind, the concept of Tripply was born. We know planning a vacation can be stressfull. Not anymore. Tripply is designed to help you create a detailed itinerary for your upcoming vacation. Most importantly, it is fully scalable. To begin a user clicks on "Sign Up" to create an account. Once signed in a user will be directed to thier profile page. They can then create a trip, by clicking "Plan Trip". After filling out the necessary trip details, you will be directed to the trip page, where you can then create new activities for your trip. You are given the option of either creating your own activity, or to use a Yelp API to suggest possible activities in your area. You can then view the location of a specific activity with the Google Maps API. If you would like to see the forecast for the location you are traveling to, simply click on the "show forecast" button. Both your trips and activities will be organized by date and time. Once you have filled out your itinerary you are on your way to a productive,exciting, well earned vacation. Happy travels!
 
 [Check out Tripply](https://gotripply.herokuapp.com/)
 
@@ -43,7 +43,7 @@ Each day, all four of the Sockapoota members would assemble and take upon oursel
 3. Made the individual views
 4. Incorporated Yelp, Google Maps and Weather API's
 5. Added CSS/Bootstrap 
-6. Late nights and alchohol(thanks to Jason and Cole for getting beer)
+6. Stay late and drink beer
 
 
 
@@ -62,7 +62,9 @@ Each day, all four of the Sockapoota members would assemble and take upon oursel
 
 ## Installation Instructions
 - Go to Github, fork the repo
-- Thats about it
+- Clone it 
+- Do NPM install in terminal
+
 
 
 
@@ -75,7 +77,7 @@ Wireframes:
 - Main user page: https://wireframe.cc/k2EUyp
 - All trips page: https://wireframe.cc/EcsXVW
 
-Data Models: 
+Data Models: https://ga-students.slack.com/files/U6GV09FK8/F7K3R5WCE/20171013_152815.jpg
 
 
 
