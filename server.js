@@ -20,11 +20,12 @@ const
     request = require('request'),
     argv = require('yargs').argv,
     moment = require('moment'),
-    // YELP API KEY
     clientId = process.env.CLIENT_ID,
     clientSecret = process.env.CLIENT_SECRET
-    // WEATHER API KEY
-    apiKey = '43e17d975597a344bebe6fabf0eefaaa'
+
+//weather api
+const apiKey = '43e17d975597a344bebe6fabf0eefaaa'
+
 
 const
     PORT = process.env.PORT || 3000,
@@ -68,26 +69,26 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
+    //res.render({message: "The root."})
+
     res.render('../views/home', {showFooter: false})
 })
 
-//  WEATHER 
-app.get('/weather', function (req, res) {
+//weather
+  app.get('/weather', function (req, res) {
     res.render('weather', {weather: null, error: null});
-})
-app.get('/weather/:id', function(req, res) {
-// console.log(req.params)
+  })
+  app.get('/weather/:id', function(req, res) {
+    console.log(req.params)
     let locale = req.params.id
     let url = `http://api.openweathermap.org/data/2.5/weather?q=${locale}&units=imperial&appid=${apiKey}`
     request(url, function (err, response, body) {
-        // res.send(body)
-        res.render('../views/weather',{ 
-            weather: JSON.parse(body) 
-        })
+    // res.send(body)
+        res.render('../views/weather',{ weather: JSON.parse(body) })
     })
-})
+  })
 
-// YELP SEARCH
+//
 app.get('/search', (req, res) => {
     yelp.accessToken(clientId, clientSecret).then(response => {
         const client = yelp.client(response.jsonBody.access_token)
@@ -101,11 +102,12 @@ app.get('/search', (req, res) => {
         })
     }).catch(e => {
         console.log(e);
-    })
+    });
     })
 
 app.use('/trips', tripsRoutes)
 app.use('/users', usersRoutes)
+
 
 app.listen(PORT, (err) => {
     console.log(err || `Server connected on port ${PORT}`)

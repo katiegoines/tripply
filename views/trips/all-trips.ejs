@@ -1,5 +1,11 @@
 <div class="container">
     <h1>All Trips</h1>
+    
+    <!-- <% for(var i = 0; i < trips.length; i ++) { %>
+        <ul>
+            <li><a href="/trips/<%= trips[i]._id %>"><%= trips[i].name %></a> - <%= trips[i].locale %> (user: <%= trips[i].user %>) </li>
+        </ul>
+    <% } %> -->
     <div class="card-box">
         <div class="card-box2">
             <% for(var i = 0; i < trips.length; i ++) { %>
@@ -15,4 +21,5 @@
             <% } %>
         </div>
     </div>
+    
 </div>

@@ -210,54 +210,50 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
     </div>
 
 <!-- EDIT ACTIVITY MODAL --> 
-    <div class="modal fade" id="editActivityModal" tabindex="-1" role="dialog" aria-labelledby="editActivityModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Activity</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="edit-activity-form">
-                            <div class="form-group">
-                                <label for="name">Place</label>
-                                <input id="edit-activity-place" type="text" class="form-control" name="place">
-                            </div>
-                            <div class="form-group" data-provide="datepicker">
-                                    <label for="date">Date</label>
-                                    <input id="editActivityDate" type="text" class="form-control" name="date">
-                            </div>
-                            <div class="form-group">
-                                <label for="time">Time</label>
-                                <input id="editActivityTime" type="text" class="form-control" name="time">
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <input id="editActivityDescription" type="textarea" class="form-control" name="description">
-                            </div>
-                            <button id="edit-activity" type="submit" class="btn btn-info">Edit Activity</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <!-- NEED TO FIND A WAY TO GET THE EXACT ACTIVITY ID AND PUT IT IN THE ROUTE HERE -->
-                        <!-- <form method="post" action="/trips/<%= trip._id %>/activities/<%# activity._id %>?_method=DELETE"></form> -->
-                            <button id='delete-activity' type="button" class="btn btn-danger delete-activity-button" data-dismiss="modal">Delete Activity</button>
-                        <!-- </form> -->
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
+<div class="modal fade" id="editActivityModal" tabindex="-1" role="dialog" aria-labelledby="editActivityModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Activity</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-activity-form">
+                        <div class="form-group">
+                            <label for="name">Place</label>
+                            <input id="edit-activity-place" type="text" class="form-control" name="place">
+                        </div>
+                        <div class="form-group" data-provide="datepicker">
+                                <label for="date">Date</label>
+                                <input id="editActivityDate" type="text" class="form-control" name="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <input id="editActivityTime" type="text" class="form-control" name="time">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input id="editActivityDescription" type="textarea" class="form-control" name="description">
+                        </div>
+                        <button id="edit-activity" type="submit" class="btn btn-info">Edit Activity</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- NEED TO FIND A WAY TO GET THE EXACT ACTIVITY ID AND PUT IT IN THE ROUTE HERE -->
+                    <!-- <form method="post" action="/trips/<%= trip._id %>/activities/<%# activity._id %>?_method=DELETE"></form> -->
+                        <button id='delete-activity' type="button" class="btn btn-danger delete-activity-button" data-dismiss="modal">Delete Activity</button>
+                    <!-- </form> -->
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
-        </div>    
+        </div>
+    </div>    
         
 
 
 <script>
-
-        var globalActivityId
-
-    // POPULATE MAP IN ACTIVITY DETAIL VIEW
         map = new google.maps.Map(document.getElementById('map'), {
             zoom: 16
         })
@@ -274,26 +270,27 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
         })
 
         
-    
-    // GET FORECAST
         var weather = $('#weather') 
         weather.on('click', function(e) {
-            e.preventDefault()
-            var locale = trip.locale
-            $.ajax({
-                url: `/weather/${locale}`,
-                method: 'get'
-            })
-            .done((res) => {
-                redirect('/weather', res)
+        e.preventDefault()
+        var locale = trip.locale
+        $.ajax({
+            url: `/weather/${locale}`,
+            method: 'get'
+        })
+        .done((res) => {
+            redirect('/weather', res)
             })
         })
-    
+
+
+    var globalActivityId
     // DATEPICKER
         $('.datepicker').datepicker({
             format: 'mm/dd/yyyy',
             startDate: '-3d'
         })
+
 
     // ACTIVITY VIEW
         // variable set
@@ -303,7 +300,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
             // activity detail click function
             $activityButton.on('click', function() {
                 var activityId = $(this).attr('id')
-                // console.log($(this).attr('id'))
+                console.log($(this).attr('id'))
                 // show modal on click
                 $('#activityModal').modal()
                 // use ajax to populate the modal with data from the route specified
@@ -360,7 +357,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
                     "description": $('#edit-activity-form input[name=description]').val()
             }
             var reqUrl =  '/trips/<%= trip._id %>/activities/' + globalActivityId
-            // console.log(reqUrl)
+            console.log(reqUrl)
             $.ajax({
                 url: reqUrl,
                 method: 'PATCH',
@@ -368,10 +365,10 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
                 contentType: 'application/json'
             })
             .done((res) => {
-                // console.log(res)
+                console.log(res)
                 $('#editActivityModal').modal('hide')
-                // console.log($('#activity-container-' + res._id).find('.activity-place'))
-                // console.log(res.place)
+                console.log($('#activity-container-' + res._id).find('.activity-place'))
+                console.log(res.place)
                 $('#activity-container-' + res._id).find('.activity-place').text(res.place)
                 $('#activity-container-' + res._id).find('.activity-date').text(res.date)
                 $('#activity-container-' + res._id).find('.activity-time').text(res.time)
@@ -380,10 +377,10 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
             })
     })
 
-    // DELETE ACTIVITY
+    // Delete Activity
         // variable set
         var $activityButton = $('.activity-button')
-        // console.log(globalActivityId)
+        console.log(globalActivityId)
         var $deleteActivityBtn = $('.delete-activity-button')
         // activity detail click function
         $deleteActivityBtn.on('click', function() {
@@ -407,7 +404,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
         })
 
         $('#add').on('submit', (evt) => {
-            // console.log('you clicked')
+            console.log('you clicked')
             var formData = {
                 "place": $('input[name=place]').val(),
                 "date": $('input[name=date]').val(),
@@ -421,7 +418,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
                 contentType: 'application/json',
             })
             .done((data) => {
-                // console.log(data)
+                console.log(data)
                 $('#newActivityModal').modal('hide')
             })
             evt.preventDefault()
@@ -458,61 +455,93 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
             $term.val('')
         })
 
-        $yelpActivityForm.on('submit', (evt) => {
-            //console.log('clicked submit')
-            //console.log($('select[name=sort_by]'))
-            evt.preventDefault()
+        $('#add').on('submit', (evt) => {
+            console.log('you clicked')
             var formData = {
-                "term": $('input[name=term]').val(),
-                "location": $('input[name=location]').val(),
-                "limit": 5,
+                "place": $('input[name=place]').val(),
+                "address": $('input[address]').val(),
+                "date": $('input[name=date]').val(),
+                "time": $('input[name=time]').val(),
+                "description": $('input[name=description]').val()
             }
-            //console.log(formData)
-            var term = formData.term
-            var location = formData.location
-            var limit = formData.limit
             $.ajax({
-                url: `/search?term=${term}&location=${location}&limit=${limit}`,
-                method: 'GET',
+                url: '/trips/<%= trip._id %>/activity',
+                method: 'POST',
                 data: JSON.stringify(formData),
-                contentType: 'application/json'
-            })
-            .done((res) => {
-                populate(res)
-                //console.log(res)
+                contentType: 'application/json',
             })
         })
 
-        function populate(items) {
-            //console.log(items)
-            $searchRes.text('')
-            items.slice(0, 5).forEach((item, i) => {
-                var card = $('<div>').addClass('card card-width').css("style", "width: 20rem;")
-                var img = $('<img>').addClass('card-img-top').attr("src", item.image_url)
-                var cardBody = $('<div>').addClass('card-body')
-                var h4 = $('<h4>').addClass('card-title').text(item.name)
-                var p = $('<p>').text(`${item.location.address1}, ${item.location.city} ${item.location.zip_code}`)
-                var ul = $('<ul>')
-                var liRating = $('<li>').text("Rating: " + item.rating)
-                var liDistance = $('<li>').text("Distance away: " + (item.distance * 0.000621371192).toFixed(2) + " mi")
-                //var liAddress = $('<li>').text("Address: " + item.location.address1 + ", " + item.location.city + " " + item.location.zip_code)
-                var liSeeMore = $('<li>')
-                var yelpButton = $('<a>').attr("href", item.url).text('See More on Yelp')
-                var selectButton = $('<button>').addClass('select-button').text("Select")
-                var itemPrice = item.price
-                var liPrice = checkPrice(itemPrice)
-                liSeeMore.append(yelpButton)                    
-                ul.append(liRating, liDistance,liPrice, liSeeMore)
-                cardBody.append(h4, selectButton, p, ul)
-                card.append(img, cardBody)
-                $searchRes.append(card)
-                function checkPrice(itemPrice) {
-                    if(item.price) {
-                        return $('<li>').text("Price: " + item.price)   
-                    }
-                }
-            })
+// SEARCH YELP
+    var $yelpActivityBtn = $('#new-activity-yelp')
+    var $yelpActivityForm = $('#yelp-activity-form')
+    var $searchRes = $('#search-res')
+    var $loc = $('.loc')
+    var $term = $('.term')
+
+    $yelpActivityBtn.on('click', function() {
+        $('#yelpActivityModal').modal()
+        $searchRes.html('')
+        //$loc.val('')
+        $term.val('')
+    })
+
+    $yelpActivityForm.on('submit', (evt) => {
+        //console.log('clicked submit')
+        //console.log($('select[name=sort_by]'))
+        evt.preventDefault()
+        var formData = {
+            "term": $('input[name=term]').val(),
+            "location": $('input[name=location]').val(),
+            "limit": 5,
         }
+        //console.log(formData)
+        var term = formData.term
+        var location = formData.location
+        var limit = formData.limit
+        $.ajax({
+            url: `/search?term=${term}&location=${location}&limit=${limit}`,
+            method: 'GET',
+            data: JSON.stringify(formData),
+            contentType: 'application/json'
+        })
+        .done((res) => {
+            populate(res)
+            //console.log(res)
+        })
+    })
+
+    function populate(items) {
+        //console.log(items)
+        $searchRes.text('')
+        items.slice(0, 5).forEach((item, i) => {
+            var card = $('<div>').addClass('card card-width').css("style", "width: 20rem;")
+            var img = $('<img>').addClass('card-img-top').attr("src", item.image_url)
+            var cardBody = $('<div>').addClass('card-body')
+            var h4 = $('<h4>').addClass('card-title').text(item.name)
+            var p = $('<p>').text(`${item.location.address1}, ${item.location.city} ${item.location.zip_code}`)
+            var ul = $('<ul>')
+            var liRating = $('<li>').text("Rating: " + item.rating)
+            var liDistance = $('<li>').text("Distance away: " + (item.distance * 0.000621371192).toFixed(2) + " mi")
+            //var liAddress = $('<li>').text("Address: " + item.location.address1 + ", " + item.location.city + " " + item.location.zip_code)
+            var liSeeMore = $('<li>')
+            var yelpButton = $('<a>').attr("href", item.url).text('See More on Yelp')
+            var selectButton = $('<button>').addClass('select-button').text("Select")
+            var itemPrice = item.price
+            var liPrice = checkPrice(itemPrice)
+            liSeeMore.append(yelpButton)                    
+            ul.append(liRating, liDistance,liPrice, liSeeMore)
+            cardBody.append(h4, selectButton, p, ul)
+            card.append(img, cardBody)
+            $searchRes.append(card)
+            function checkPrice(itemPrice) {
+                if(item.price) {
+                    return $('<li>').text("Price: " + item.price)   
+                }
+            }
+        })
+    }
+        
         
     $('body').on('click', '.select-button', function() {
         var item = $(this).prev()
@@ -544,14 +573,15 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
             //console.log($nameInput)
             $nameInput.val(selectedPlace)
         }
+    }
+    
 
-        var $addressInput = $('.address-name')
-        function checkAddress(selectedAddress) {
-            if(selectedAddress != '') {
-                //console.log(selectedAddress)
-                //console.log($addressInput)
-                $addressInput.val(selectedAddress)
-            }
+    var $addressInput = $('.address-name')
+    function checkAddress(selectedAddress) {
+        if(selectedAddress != '') {
+            //console.log(selectedAddress)
+            //console.log($addressInput)
+            $addressInput.val(selectedAddress)
         }
     }
 </script>
