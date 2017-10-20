@@ -10,6 +10,26 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', endColorstr='#1e69de',GradientType=0 ); /* IE6-9 */
 }
 
+.edit-trip-jumbo {
+    padding: 5%!important;
+    width: 80%!important; 
+    background: rgb(109,179,242)!important; /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(109,179,242,1) 0%, rgba(84,163,238,1) 50%, rgba(54,144,240,1) 82%, rgba(54,144,240,1) 82%, rgba(30,105,222,1) 100%)!important; /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(109,179,242,1) 0%,rgba(84,163,238,1) 50%,rgba(54,144,240,1) 82%,rgba(54,144,240,1) 82%,rgba(30,105,222,1) 100%)!important; /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(109,179,242,1) 0%,rgba(84,163,238,1) 50%,rgba(54,144,240,1) 82%,rgba(54,144,240,1) 82%,rgba(30,105,222,1) 100%)!important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', endColorstr='#1e69de',GradientType=0 ); /* IE6-9 */
+}
+
+.edit-profile-jumbo {
+    padding: 5%!important;
+    width: 80%!important; 
+    background: rgb(109,179,242)!important; /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(109,179,242,1) 0%, rgba(84,163,238,1) 50%, rgba(54,144,240,1) 82%, rgba(54,144,240,1) 82%, rgba(30,105,222,1) 100%)!important; /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(109,179,242,1) 0%,rgba(84,163,238,1) 50%,rgba(54,144,240,1) 82%,rgba(54,144,240,1) 82%,rgba(30,105,222,1) 100%)!important; /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(109,179,242,1) 0%,rgba(84,163,238,1) 50%,rgba(54,144,240,1) 82%,rgba(54,144,240,1) 82%,rgba(30,105,222,1) 100%)!important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', endColorstr='#1e69de',GradientType=0 ); /* IE6-9 */
+}
+
 /* Styles for the profile.ejs page */
 .profile {
     margin-top: 2rem; 
@@ -36,6 +56,22 @@
     margin-top: 1rem; 
 }
 
+.date-show {
+    text-align: right; 
+}
+
+.details-show {
+    text-align: right; 
+}
+
+.profile-edit {
+    text-align: right; 
+}
+
+.new-trip-button-div {
+    text-align: right; 
+}
+
 /* Styles for the trip.ejs page */
 .trip-page {
     margin-top: 2rem; 
@@ -44,10 +80,6 @@
 .day {
     border: 1px solid black;
     border-radius: 6px; 
-}
-
-.activities {
-    margin-left: 4rem; 
 }
 
 /* Navbar styles */
@@ -80,7 +112,9 @@
 
 .carousel-inner {
     height: 100%; 
-    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .canyon {
@@ -106,8 +140,8 @@
 .jumbo-user-btn {
     text-align: center; 
 }
-/* All Trips Page */
 
+/* All Trips Page */
 @media only screen and (max-width:992px) {
     .card-box {
         width: 355px;
@@ -121,7 +155,6 @@
         margin: 0 auto; 
     }
 }
-
 
 @media only screen and (min-width:1200px) {
     .card-box {
@@ -141,7 +174,6 @@
 }
 
 /* Yelp Search Results */
-
 .select-button {
     clear: both;
     float:right;
@@ -161,7 +193,6 @@
     margin: 0 auto;
     padding: 50px;
 }
-
 
 /* Login and signup form page styles */
 .login-home {
@@ -185,4 +216,92 @@
 
 .login-container {
     margin-top: -2rem!important; 
+}
+
+
+/*
+MAP
+*/
+
+#map {
+    height: 200px;
+    width: 100%;
+}
+
+/* Edit trip view styles */
+.edit-trip-back {
+    text-align: right; 
+}
+
+.edit-trip-jumbo {
+    margin: 3rem auto!important; 
+}
+
+.edit-profile-back {
+    text-align: right; 
+}
+
+.edit-profile-jumbo {
+    margin: 3rem auto!important; 
+}
+
+/* Styles for trip ejs */
+.trip-edit-tripejs {
+    text-align: left;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.add-activity-tripejs {
+    text-align: center;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.add-activity-yelp-tripejs {
+    text-align: right; 
+    margin-left: 1rem;
+}
+
+.trip-ejs-header-btns {
+    margin: 0 auto; 
+}
+
+.forecast-btn {
+    text-align: center; 
+}
+
+.view-activity {
+    text-align: right; 
+}
+
+/* Weather ejs page  */
+.weather-page {
+    padding: 5%!important;
+    width: 80%!important; 
+    background: rgb(109,179,242)!important; /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(109,179,242,1) 0%, rgba(84,163,238,1) 50%, rgba(54,144,240,1) 82%, rgba(54,144,240,1) 82%, rgba(30,105,222,1) 100%)!important; /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(109,179,242,1) 0%,rgba(84,163,238,1) 50%,rgba(54,144,240,1) 82%,rgba(54,144,240,1) 82%,rgba(30,105,222,1) 100%)!important; /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(109,179,242,1) 0%,rgba(84,163,238,1) 50%,rgba(54,144,240,1) 82%,rgba(54,144,240,1) 82%,rgba(30,105,222,1) 100%)!important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', endColorstr='#1e69de',GradientType=0 ); /* IE6-9 */
+}
+
+.forecast-back {
+    text-align: right; 
+}
+
+p.weather-info {
+    font-size: 2rem; 
+}
+
+.forecast-name {
+    font-size: 3rem; 
+}
+
+.container {
+    margin-bottom: 5rem; 
+}
+
+.footer {
+    margin-top: 1rem; 
 }

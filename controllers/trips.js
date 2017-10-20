@@ -79,6 +79,13 @@ module.exports = {
             res.json({success: true, message: `${deletedActivity.place} has been deleted.`})
         })
     },
+
+    // 1. look up the trip by id
+    // 2. hit the weather api for 10 day forecast,
+    // using trip's locale as the term
+    // 3. when you get data back from api,
+    // render a forecast view and show the 10 day forecast results
+    
 }
 
 
