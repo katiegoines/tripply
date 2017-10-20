@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://localhost:3000/trips/59e6390b05396553c2cdf357 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tripply</title>
+    <link rel="stylesheet" href="./Tripply_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./Tripply_files/styles.css">
+    <link rel="stylesheet" href="./Tripply_files/bootstrap-datepicker.min.css">
+    <script src="./Tripply_files/jquery-3.2.1.min.js"></script>
+    <script src="./Tripply_files/popper.min.js"></script>
+    <script src="./Tripply_files/bootstrap.min.js"></script>
+    <script src="./Tripply_files/bootstrap-datepicker.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="http://localhost:3000/">Tripply</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <!-- <li class="nav-item active">
+          <a class="nav-link" href="/">Home</a>
+        </li> -->
+        
+            <li class="nav-item active">
+                <a class="nav-link" href="http://localhost:3000/users/profile">Profile</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="http://localhost:3000/users/logout">Log Out</a>
+            </li> 
+        
+      </ul>
+    </div>
+   
+</nav> 
+    <div class="container trip-page">
+    <div class="row">
+        <div class="col-6">
+            <h1>Hello</h1>
+        </div>
+
+       <!-- Determines whether to show Edit/Add buttons (no unless the trip belongs to the current user) -->
+        
+            
+        
+        
+        
+            
+        <div class="col-2">
+            <a class="btn btn-info" href="http://localhost:3000/trips/59e6390b05396553c2cdf357/edit">Edit Trip</a>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-primary new-activity-button">Add Activity</button>
+        </div>
+        <div class="col-2">
+            <button id="new-activity-yelp" class="btn btn-primary">Search Yelp</button>
+        </div>
+        
+    </div>
+
+<!-- need to change the below section to be a div for each DAY
+In that day we want to see the name of each activity with the time (as list items)
+And a button that displays a modal of the activity details on click -->
+
+    
+        <div id="activity-container-59e8e647914231c8d441305c" class="list-group row day">
+            <div class="col-12">
+                <h3>10/21/2017</h3>
+            </div>
+            <div class="list-group-item">
+                <div class="row activities">
+                    <div class="col-4 activity-name">
+                        <h6 class="activity-place">hhh</h6>
+                    </div>
+                    <div class="col-4 activity-time">
+                        <h6>erqfe</h6>
+                    </div>
+                    <div class="col-2">
+                        <h6>efeqrf</h6>
+                    </div>
+                    <div class="col-1">
+                        <!-- assign id to button based on objects db id to use in ajax request -->
+                        <button id="59e8e647914231c8d441305c" class="btn btn-primary activity-button">See Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="activity-container-59e8f09c88051ecf655c56ca" class="list-group row day">
+            <div class="col-12">
+                <h3>10/23/2017</h3>
+            </div>
+            <div class="list-group-item">
+                <div class="row activities">
+                    <div class="col-4 activity-name">
+                        <h6 class="activity-place">hello</h6>
+                    </div>
+                    <div class="col-4 activity-time">
+                        <h6>10:00 P.M.</h6>
+                    </div>
+                    <div class="col-2">
+                        <h6>sfdgersdghtf</h6>
+                    </div>
+                    <div class="col-1">
+                        <!-- assign id to button based on objects db id to use in ajax request -->
+                        <button id="59e8f09c88051ecf655c56ca" class="btn btn-primary activity-button">See Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="activity-container-59e8f0bf88051ecf655c56cb" class="list-group row day">
+            <div class="col-12">
+                <h3>10/23/2017</h3>
+            </div>
+            <div class="list-group-item">
+                <div class="row activities">
+                    <div class="col-4 activity-name">
+                        <h6 class="activity-place">g</h6>
+                    </div>
+                    <div class="col-4 activity-time">
+                        <h6>10:00 P.M.</h6>
+                    </div>
+                    <div class="col-2">
+                        <h6>eqwaraw</h6>
+                    </div>
+                    <div class="col-1">
+                        <!-- assign id to button based on objects db id to use in ajax request -->
+                        <button id="59e8f0bf88051ecf655c56cb" class="btn btn-primary activity-button">See Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+
+<!-- MODAL - ADD ACTIVITY --> 
+    <div class="modal fade" id="newActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Activity</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="new-activity-form" action="http://localhost:3000/trips/59e6390b05396553c2cdf357/activity" method="POST">
+                        <div class="form-group">
+                            <label for="name">Place</label>
+                            <input type="text" class="form-control place-name" value="" name="place">
+                        </div>
+                        <div class="form-group" data-provide="datepicker">
+                                <label for="date">Date</label>
+                                <input type="text" class="form-control" name="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="local">Time</label>
+                            <input type="text" class="form-control" name="time">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="textarea" class="form-control" name="description">
+                        </div>
+                        <button id="add" type="submit" class="btn btn-primary">Add Activity</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- MODAL - SEARCH YELP -->
+    <div class="modal fade" id="yelpActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Search for an activity on Yelp</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="yelp-activity-form">
+                <div class="form-group">
+                    <label for="name">Search Term</label>
+                    <input type="text" class="form-control term" name="term">
+                </div>
+
+                <div class="form-group">
+                    <label for="local">Location</label>
+                    <input type="text" class="form-control loc" name="location">
+                </div>
+
+                <button id="search" type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+            <div class="results">
+                <ul id="search-res"></ul>   
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+<!-- MODAL - ACTIVITY VIEW -->
+    <div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="activityModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="activityModalLabel">Activity Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <section id="activityPlace"> Place: </section>
+                    <section id="activityDate"> Date: </section>
+                    <section id="activityTime"> Time: </section>
+                    <section id="activityDescription"> Description: </section>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary edit-activity-button" data-dismiss="modal">Edit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- EDIT ACTIVITY MODAL --> 
+<div class="modal fade" id="editActivityModal" tabindex="-1" role="dialog" aria-labelledby="editActivityModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Activity</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-activity-form">
+                        <div class="form-group">
+                            <label for="name">Place</label>
+                            <input id="edit-activity-place" type="text" class="form-control" name="place">
+                        </div>
+                        <div class="form-group" data-provide="datepicker">
+                                <label for="date">Date</label>
+                                <input id="editActivityDate" type="text" class="form-control" name="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <input id="editActivityTime" type="text" class="form-control" name="time">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input id="editActivityDescription" type="textarea" class="form-control" name="description">
+                        </div>
+                        <button id="edit-activity" type="submit" class="btn btn-primary">Edit Activity</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- NEED TO FIND A WAY TO GET THE EXACT ACTIVITY ID AND PUT IT IN THE ROUTE HERE -->
+                    <!-- <form method="post" action="/trips/59e6390b05396553c2cdf357/activities/?_method=DELETE"></form> -->
+                        <button id="delete-activity" type="button" class="btn btn-secondary delete-activity-button" data-dismiss="modal">Delete Activity</button>
+                    <!-- </form> -->
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+        
+
+
+<script>
+    
+var globalActivityId
+// DATEPICKER
+    $('.datepicker').datepicker({
+        format: 'mm/dd/yyyy',
+        startDate: '-3d'
+    })
+
+
+// ACTIVITY VIEW
+    // variable set
+        var $activityButton = $('.activity-button')
+        var $newActivityBtn = $('.new-activity-button')
+    // activity show stuff
+        // activity detail click function
+        $activityButton.on('click', function() {
+            
+            var activityId = $(this).attr('id')
+            console.log($(this).attr('id'))
+            // show modal on click
+            $('#activityModal').modal()
+            // use ajax to populate the modal with data from the route specified
+            $.ajax({
+                // create url by concatenating activityId 
+                url: '/trips/59e6390b05396553c2cdf357/activities/' + activityId,
+                method: 'get'
+            })
+            .done((res) => { 
+                $('#activityPlace').text('Place: ' + res.place)
+                $('#activityDate').text('Date: ' + res.date)
+                $('#activityTime').text('Time: ' + res.time)
+                $('#activityDescription').text('Description: ' + res.description)
+
+                $('#edit-activity-place').val(res.place)
+                $('#editActivityDate').val(res.date)
+                $('#editActivityTime').val(res.time)
+                $('#editActivityDescription').val(res.description)
+
+                globalActivityId = activityId
+            })
+        })
+
+//EDIT ACTIVITY VIEW
+    // variable set
+    var $editActivityBtn = $('.edit-activity-button')
+    $editActivityBtn.on('click', function() {
+        
+        $('#editActivityModal').modal()
+
+    })
+    
+    var $editActivityForm = $('#edit-activity-form')
+    $editActivityForm.on('submit', (evt) => {
+        evt.preventDefault()
+        var editFormData = {
+                "place": $('#edit-activity-form input[name=place]').val(),
+                "date": $('#edit-activity-form input[name=date]').val(),
+                "time": $('#edit-activity-form input[name=time]').val(),
+                "description": $('#edit-activity-form input[name=description]').val()
+        }
+        var reqUrl =  '/trips/59e6390b05396553c2cdf357/activities/' + globalActivityId
+        console.log(reqUrl)
+        $.ajax({
+            url: reqUrl,
+            method: 'PATCH',
+            data: JSON.stringify(editFormData),
+            contentType: 'application/json'
+        })
+        .done((res) => {
+            console.log(res)
+            $('#editActivityModal').modal('hide')
+            /* Need to figure out the lines below in order to have the edit modal populate
+            the form by default */
+            /*$('#edit-activity-place').val(res.place)
+            $('#editActivityDate').val(res.date)
+            $('#editActivityTime').val(res.time)
+            $('#editActivityDescription').val(res.description)*/
+        })
+})
+
+// Delete Activity
+    // variable set
+    var $activityButton = $('.activity-button')
+    console.log(globalActivityId)
+    var $deleteActivityBtn = $('.delete-activity-button')
+// activity show stuff
+    // activity detail click function
+    $deleteActivityBtn.on('click', function() {
+        // use ajax to populate the modal with data from the route specified
+        $.ajax({
+            // create url by concatenating globalActivityId 
+            url: '/trips/59e6390b05396553c2cdf357/activities/' + globalActivityId,
+            method: 'delete'
+        })
+        .done((res) => { 
+            console.log(res)
+        })
+    })
+        
+// ADD ACTIVITY
+    var $newActivityForm = $('#new-activity-form')
+
+    $newActivityBtn.on('click', function() {
+        $('#newActivityModal').modal()
+    })
+
+    $('#add').on('submit', (evt) => {
+        console.log('you clicked')
+        var formData = {
+            "place": $('input[name=place]').val(),
+            "date": $('input[name=date]').val(),
+            "time": $('input[name=time]').val(),
+            "description": $('input[name=description]').val()
+        }
+        $.ajax({
+            url: '/trips/59e6390b05396553c2cdf357/activity',
+            method: 'POST',
+            data: JSON.stringify(formData),
+            contentType: 'application/json'
+        })
+        .done((data) => {
+            console.log(data)
+            $('#newActivityModal').modal('hide')
+        })
+        evt.preventDefault()
+    })
+
+// SEARCH YELP
+    var $yelpActivityBtn = $('#new-activity-yelp')
+    var $yelpActivityForm = $('#yelp-activity-form')
+    var $searchRes = $('#search-res')
+    var $loc = $('.loc')
+    var $term = $('.term')
+
+    $yelpActivityBtn.on('click', function() {
+        $('#yelpActivityModal').modal()
+        $searchRes.html('')
+        $loc.val('')
+        $term.val('')
+    })
+
+    $yelpActivityForm.on('submit', (evt) => {
+        console.log('clicked submit')
+        console.log($('select[name=sort_by]'))
+        evt.preventDefault()
+        var formData = {
+            "term": $('input[name=term]').val(),
+            "location": $('input[name=location]').val(),
+            "limit": 5,
+        }
+        console.log(formData)
+        var term = formData.term
+        var location = formData.location
+        var limit = formData.limit
+        $.ajax({
+            url: `/search?term=${term}&location=${location}&limit=${limit}`,
+            method: 'GET',
+            data: JSON.stringify(formData),
+            contentType: 'application/json'
+        })
+        .done((res) => {
+            populate(res)
+            console.log(res)
+        })
+    })
+
+    function populate(items) {
+        //console.log(items)
+        $searchRes.text('')
+        items.slice(0, 5).forEach((item, i) => {
+            var card = $('<div>').addClass('card card-width').css("style", "width: 20rem;")
+            var img = $('<img>').addClass('card-img-top').attr("src", item.image_url)
+            var cardBody = $('<div>').addClass('card-body')
+            var h4 = $('<h4>').addClass('card-title').text(item.name)
+            var ul = $('<ul>')
+            var liRating = $('<li>').text("Rating: " + item.rating)
+            var liDistance = $('<li>').text("Distance away: " + (item.distance * 0.000621371192).toFixed(2) + " mi")
+            var liAddress = $('<li>').text("Address: " + item.location.address1 + ", " + item.location.city + " " + item.location.zip_code)
+            var liSeeMore = $('<li>')
+            var yelpButton = $('<a>').attr("href", item.url).text('See More on Yelp')
+            var selectButton = $('<button>').addClass('select-button').text("Select")
+            var itemPrice = item.price
+            var liPrice = checkPrice(itemPrice)
+            liSeeMore.append(yelpButton)                    
+            ul.append(liRating, liDistance, liAddress, liPrice, liSeeMore)
+            cardBody.append(h4, selectButton, ul)
+            card.append(img, cardBody)
+            $searchRes.append(card)
+            function checkPrice(itemPrice) {
+                if(item.price) {
+                    return $('<li>').text("Price: " + item.price)   
+                }
+            }
+        })
+    }
+    
+    $('body').on('click', '.select-button', function() {
+        var item = $(this).prev()
+        selectedPlace = item.text()
+        console.log(selectedPlace)
+        checkPlace(selectedPlace)
+        $('#yelpActivityModal').modal('hide')   
+        $('#newActivityModal').modal()
+    })
+
+
+    var $nameInput = $('.place-name')
+    function checkPlace(selectedPlace) {
+        if(selectedPlace != '') {
+            console.log(selectedPlace)
+            console.log($nameInput)
+            $nameInput.val(selectedPlace)
+        }
+    }
+    
+
+
+
+</script> 
+
+</div></body></html>

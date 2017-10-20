@@ -1,0 +1,13 @@
+<h1>TRY</h1>
+
+
+<% for(var i = 0; i < results.length; i += 1) { %>
+    <ul>
+        <li><%= results[i].name %>
+            <ul>
+            <li><%= results[i].price %></li>
+            <li><%= results[i].location.address1 %>, <li><%= results[i].location.city %>, <li><%= results[i].location.zip_code %></li></li></li>
+            </ul>
+        </li>
+    </ul>
+<% } %>
