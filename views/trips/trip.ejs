@@ -201,7 +201,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
                     <% var tripUserId = trip.user %>
                     <% if(loggedIn && currentUserId == tripUserId) { %>
                         <% console.log(currentUserId == tripUserId) %>
-                        <button type="button" class="btn btn-secondary edit-activity-button" data-dismiss="modal">Edit</button>
+                        <button type="button" class="btn btn-secondary edit-activity-button" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal">Edit</button>
                     <% } %>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
