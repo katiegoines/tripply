@@ -8,7 +8,6 @@ const
 
 tripsRouter.get('/', tripsController.index)
 tripsRouter.get('/:id', tripsController.show)
-// tripsRouter.get('/:id/forecast', tripsController.forecast)
 tripsRouter.patch('/:id', tripsController.update)
 tripsRouter.delete('/:id', tripsController.delete)
 tripsRouter.get('/:id/edit', tripsController.edit)

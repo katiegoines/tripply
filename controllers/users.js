@@ -66,7 +66,7 @@ const
         edit: (req, res) => {
             User.findById(req.user._id, (err, user) => {
                 if(err) return console.log(err)
-                console.log(req.user)
+                // console.log(req.user)
                 res.render('../views/users/edit', {user:user})
             })
         },
