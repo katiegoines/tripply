@@ -82,10 +82,6 @@
     border-radius: 6px; 
 }
 
-/* .activities {
-    margin-left: 4rem; 
-} */
-
 /* Navbar styles */
 .navbar-brand {
     font-size: 2.5rem; 
@@ -116,7 +112,9 @@
 
 .carousel-inner {
     height: 100%; 
-    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .canyon {
@@ -298,4 +296,12 @@ p.weather-info {
 
 .forecast-name {
     font-size: 3rem; 
+}
+
+.container {
+    margin-bottom: 5rem; 
+}
+
+.footer {
+    margin-top: 1rem; 
 }
