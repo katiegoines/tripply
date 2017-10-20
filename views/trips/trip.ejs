@@ -19,9 +19,9 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
                     <a class='btn btn-info' href='/trips/<%= trip._id %>/edit'>Edit Trip</a>
                 </div>
                 <div class='add-activity-tripejs'>
-                    <button class='btn btn-primary new-activity-button'>Add Activity</button>
+                    <button class='btn btn-primary new-activity-button' data-toggle="modal" data-target="#exampleModal">Add Activity</button>
                 </div>
-                <div class='add-activity-yelp-tripejs'>
+                <div class='add-activity-yelp-tripejs' data-toggle="modal" data-target="#exampleModal">
                     <button id="new-activity-yelp" class='btn btn-danger'>Search Yelp</button>
                 </div>
                 <% } %>
@@ -64,7 +64,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
                             <h6 class='activity-description'><%= a.description %></h6>
                         </div>
                         <div class='col-3'>
-                            <button id="<%= a._id %>" class="btn btn-primary activity-button">See Details</button>
+                            <button id="<%= a._id %>" class="btn btn-primary activity-button" data-toggle="modal" data-target="#exampleModal">See Details</button>
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
                                 <h6 class='activity-description'><%= a.description %></h6>
                             </div>
                             <div class='col-6  view-activity'>
-                                <button id="<%= a._id %>" class="btn btn-primary activity-button">View</button>
+                                <button id="<%= a._id %>" class="btn btn-primary activity-button" data-toggle="modal" data-target="#exampleModal">View</button>
                             </div>
                         </div>
                     </div>
@@ -201,7 +201,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
                     <% var tripUserId = trip.user %>
                     <% if(loggedIn && currentUserId == tripUserId) { %>
                         <% console.log(currentUserId == tripUserId) %>
-                        <button type="button" class="btn btn-secondary edit-activity-button" data-dismiss="modal">Edit</button>
+                        <button type="button" class="btn btn-secondary edit-activity-button" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal">Edit</button>
                     <% } %>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
