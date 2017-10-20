@@ -57,14 +57,14 @@ module.exports = {
         newActivity.trip = req.params.id
         newActivity.user = req.user
         newActivity.save((err, activity) => {
-            console.log(req.params.id)
+            // console.log(req.params.id)
             res.redirect(`/trips/${req.params.id}`)
             //res.json({success: true, message: "Activity created!", activity})
         })
     },
 
     updateActivity: (req, res) => {
-        console.log(req.body)
+        // console.log(req.body)
         Activity.findByIdAndUpdate(req.params.activityId, req.body, {'new': true}, (err, updatedActivity) => {
             // updatedActivity = req.body
             if (err) console.log(err)
