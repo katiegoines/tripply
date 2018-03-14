@@ -21,14 +21,15 @@ const
     argv = require('yargs').argv,
     moment = require('moment'),
     clientId = process.env.CLIENT_ID,
-    clientSecret = process.env.CLIENT_SECRET
+    clientSecret = process.env.CLIENT_SECRET,
+    yelpKey = process.env.API_Key
 
 //weather api
 const apiKey = '43e17d975597a344bebe6fabf0eefaaa'
 
 
 const
-    PORT = process.env.PORT || 3000,
+    PORT = process.env.PORT || 3002,
     mongoConnectionString = process.env.MONGODB_URI || 'mongodb://localhost/tripply'
 
 mongoose.connect(mongoConnectionString, (err) => {
@@ -89,21 +90,41 @@ app.get('/', (req, res) => {
   })
 
 //
+// app.get('/search', (req, res) => {
+//     console.log(req)
+//     yelp.accessToken(clientId, clientSecret).then(response => {
+//         const client = yelp.client(response.jsonBody.access_token)
+//         // console.log(client)
+//         client.search({
+//             term: req.query.term,
+//             location: req.query.location
+//         }).then(response => {
+//             console.log(response.jsonBody.businesses);
+//             res.json(response.jsonBody.businesses)
+//             // res.render('../views/try', {results: response.jsonBody.businesses})
+//         })
+//     }).catch(e => {
+//         console.log(e);
+//     });
+//     })
+
 app.get('/search', (req, res) => {
-    yelp.accessToken(clientId, clientSecret).then(response => {
-        const client = yelp.client(response.jsonBody.access_token)
+    // console.log(res)
+    // yelp.accessToken(clientId, clientSecret).then(response => {
+        // const client = yelp.client(response.jsonBody.access_token)
+        const client = yelp.client(yelpKey)
+    //     // console.log(client)
         client.search({
             term: req.query.term,
             location: req.query.location
         }).then(response => {
-            console.log(response.jsonBody.businesses);
+            // console.log(response.jsonBody.businesses);
             res.json(response.jsonBody.businesses)
             // res.render('../views/try', {results: response.jsonBody.businesses})
-        })
-    }).catch(e => {
-        console.log(e);
-    });
-    })
+        }).catch(e => {
+            console.log(e);
+        });
+})
 
 app.use('/trips', tripsRoutes)
 app.use('/users', usersRoutes)

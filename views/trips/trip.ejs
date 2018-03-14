@@ -19,10 +19,10 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
                     <a class='btn btn-info' href='/trips/<%= trip._id %>/edit'>Edit Trip</a>
                 </div>
                 <div class='add-activity-tripejs'>
-                    <button class='btn btn-primary new-activity-button' data-toggle="modal" data-target="#exampleModal">Add Activity</button>
+                    <a class='btn btn-primary new-activity-button' data-toggle="modal" data-target="#exampleModal">Add Activity</a>
                 </div>
                 <div class='add-activity-yelp-tripejs'>
-                    <button id="new-activity-yelp" class='btn btn-danger'  data-toggle="modal" data-target="#exampleModal">Search Yelp</button>
+                    <a id="new-activity-yelp" class='btn btn-danger'  data-toggle="modal" data-target="#exampleModal">Search Yelp</a>
                 </div>
                 <% } %>
             </div>
@@ -64,7 +64,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
                             <h6 class='activity-description'><%= a.description %></h6>
                         </div>
                         <div class='col-3'>
-                            <button id="<%= a._id %>" class="btn btn-primary activity-button" data-toggle="modal" data-target="#exampleModal">See Details</button>
+                            <a id="<%= a._id %>" class="btn btn-primary activity-button" data-toggle="modal" data-target="#exampleModal">See Details</a>
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Search for an activity on Yelp</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Search for an activity via Yelp</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -254,19 +254,23 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
 
 
 <script>
-        map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 16
-        })
-        marker = new google.maps.Marker({
-            map: map
-        })
-        var latitude
-        var longitude
-        $('#activityModal').on('shown.bs.modal', function() {
-            var uluru = {lat: latitude, lng: longitude}
-            google.maps.event.trigger(map, 'resize')
-            marker.setPosition({lat: latitude, lng: longitude})
-            map.setCenter({lat: latitude, lng: longitude})
+        var map
+        function initMap() {}
+        $(() => function() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16
+            })
+            marker = new google.maps.Marker({
+                map: map
+            })
+            var latitude
+            var longitude
+            $('#activityModal').on('shown.bs.modal', function() {
+                var uluru = {lat: latitude, lng: longitude}
+                google.maps.event.trigger(map, 'resize')
+                marker.setPosition({lat: latitude, lng: longitude})
+                map.setCenter({lat: latitude, lng: longitude})
+            })
         })
 
         
@@ -424,36 +428,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
             evt.preventDefault()
         })
 
-    $('#add').on('submit', (evt) => {
-        // console.log('you clicked')
-        var formData = {
-            "place": $('input[name=place]').val(),
-            "address": $('input[address]').val(),
-            "date": $('input[name=date]').val(),
-            "time": $('input[name=time]').val(),
-            "description": $('input[name=description]').val()
-        }
-        $.ajax({
-            url: '/trips/<%= trip._id %>/activity',
-            method: 'POST',
-            data: JSON.stringify(formData),
-            contentType: 'application/json',
-        })
-    })
-
-    // SEARCH YELP
-        var $yelpActivityBtn = $('#new-activity-yelp')
-        var $yelpActivityForm = $('#yelp-activity-form')
-        var $searchRes = $('#search-res')
-        var $loc = $('.loc')
-        var $term = $('.term')
-
-        $yelpActivityBtn.on('click', function() {
-            $('#yelpActivityModal').modal()
-            $searchRes.html('')
-            //$loc.val('')
-            $term.val('')
-        })
 
         $('#add').on('submit', (evt) => {
             console.log('you clicked')
@@ -499,6 +473,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
         var term = formData.term
         var location = formData.location
         var limit = formData.limit
+        console.log(JSON.stringify(formData))
         $.ajax({
             url: `/search?term=${term}&location=${location}&limit=${limit}`,
             method: 'GET',
@@ -507,7 +482,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
         })
         .done((res) => {
             populate(res)
-            //console.log(res)
+            console.log(res)
         })
     })
 
